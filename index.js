@@ -24,3 +24,10 @@ const InitializeDBAndServer = async () => {
 };
 
 InitializeDBAndServer();
+
+app.get("/books/", async (request, response) => {
+  const getBooksQuery = `
+    select * from book order By book_id ;`;
+  const booksArray = await db.all(getBooksQuery);
+  response.send(booksArray);
+});
